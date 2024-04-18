@@ -1,0 +1,26 @@
+header {
+    border-bottom: 1px solid #e5e8eb;
+    padding: 12px 40px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo a > span {
+    color: #121417;
+    font-size: 20px;
+    font-weight: 700;
+    
+}
+
+.navItems {
+    gap: 36px;
+    margin-right: -13em;
+}
+
+.btn__wrapper {
+    gap: 16px;
+}
