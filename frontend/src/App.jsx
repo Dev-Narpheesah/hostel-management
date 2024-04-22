@@ -4,6 +4,7 @@ import Login from "./Component/Register/Login";
 import StudentReg from "./Component/Register/StudentReg";
 import HomeDash from "./Component/Dashboard/HomeDash";
 import Layout from "./Component/Layout/Layout";
+import StudentDasBoard from "./Component/Dashboard/StudentDasBoard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/studentdash" element={<StudentDasBoard/>}/>
         </Routes>
       </div>
     </>

@@ -1,0 +1,13 @@
+.left {
+    padding: 16px;
+    width: 307px;
+    max-width: 300px;
+    height: 760px;
+    background-color: #FFF;
+}
+
+.left > div {
+    padding: 8px 12px;
+    margin: 8px;
+}
+
