@@ -5,6 +5,10 @@ import "./Dashboard.css";
 const SideBar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const handleLinkClick = (index) => {
+    setActiveIndex(index)
+  }
+
   const dashboardLinks = [
     { title: "Students", url: "/studentdash" },
     { title: "Rooms", url: "/room" },
