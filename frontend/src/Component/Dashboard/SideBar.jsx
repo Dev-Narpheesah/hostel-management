@@ -20,7 +20,10 @@ const SideBar = () => {
       <div className="left">
         {dashboardLinks.map(({ title, url }, index) => (
           <div className="--flex-center --dir-column" key={index}>
-            <Link to={url}>{title}</Link>
+            <Link to={url} className={index === activeIndex ? "active-link" : ""}
+            onClick={() => handleLinkClick(index)}>
+                {title}</Link>
+                
           </div>
         ))}
       </div>
