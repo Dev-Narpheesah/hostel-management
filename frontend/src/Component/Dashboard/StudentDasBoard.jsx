@@ -1,129 +1,138 @@
-import React, { useState } from "react";
-import SideBar from "./SideBar";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import React from 'react'
+import './Dashboard.css'
+import { useState} from 'react'
+import {Link} from 'react-router-dom'
+import {RiDeleteBin6Line} from "react-icons/ri"
+import SideBar from './SideBar'
 
-const studentData = [
-  {
-    id: 1,
-    name: "Jessica Smith",
-    email: "jessica.smith@gmail.com",
-    idNumber: "12345",
-    gender: "Female",
-    age: 20,
-    nationality: "American",
-  },
-  {
-    id: 2,
-    name: "Mason Musk",
-    email: "mason.willy@gmail.com",
-    idNumber: "23456",
-    gender: "Male",
-    age: 21,
-    nationality: "British",
-  },
-  {
-    id: 3,
-    name: "Emily Stone",
-    email: "mily.stone@gmail.com",
-    idNumber: "34567",
-    gender: "Female",
-    age: 25,
-    nationality: "Spanish",
-  },
-  {
-    id: 4,
-    name: "Nelson Matt",
-    email: "nelson.matt@gmail.com",
-    idNumber: "45678",
-    gender: "Male",
-    age: 28,
-    nationality: "Egyptian",
-  },
-];
 
-const StudentDasBoard = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [students, setStudents] = useState(studentData);
-  const [filtereddata, setFilteredData] = useState(studentData);
+const studentsData=[
+  {
+    id:1,
+    name:"Jessica Smith",
+    email:"jessicasmith@gmail.com",
+    idNumber:"12345",
+    gender:"female",
+    age:21,
+    nationality:"Spanish"
 
+  },
+  {
+    id:2,
+    name:"Jason Musk",
+    email:"musk312@gmail.com",
+    idNumber:"23456",
+    gender:"Male",
+    age:25,
+    nationality:"American"
+
+  },
+  {
+    id:3,
+    name:"Emily Stone",
+    email:"emilystone@gmail.com",
+    idNumber:"34567",
+    gender:"Female",
+    age:32,
+    nationality:"Egyptian"
+
+  }
+]
+
+const StudentDashBoard = () => {
+  const [searchTerm, setSearchTerm]= useState('')
+  const [students, setStudents]= useState(studentsData)
+  const [filteredData, setFilteredData]= useState(studentsData)
+
+//targetting the searchbar that will be call later
   const handleSearchChange = (e) => {
-    const term = e.target.value.toLowecase();
-    setSearchTerm(term);
-    const filtered = studentData.filter(
+    const term = e.target.value.toLowerCase()
+    setSearchTerm(term)
+    const filtered = studentsData.filter(
       (student) =>
-        student.name.toLowerCase().includes(term) ||
-        student.email.toLowerCase().includes(term)
+      student.name.toLowerCase().includes(term) ||
+      student.email.toLowerCase().includes(term)
+
+
     );
-    setFilteredData(filtered);
-  };
+    setFilteredData(filtered)
+  }
+
 
   const handleDelete = (studentId) => {
+     // Filter out the deleted student from the students array
     const updatedStudents = students.filter(
-      (student) => student.id !== studentId
+      (student) => student.id !==studentId
     );
     setStudents(updatedStudents);
-    const updatedFilteredData = filtereddata.filter(
-      (student) => student.id !== studentId
+
+    const updatedFilteredData= filteredData.filter(
+      (student) => student.id !==studentId
     );
-    setFilteredData(updatedFilteredData);
-  };
+    setFilteredData(updatedFilteredData)
+  }
+
+
+
+
 
   return (
     <div className="container --flex-start">
-      <SideBar />
-      <div className="right">
-        <p>Students</p>
-        <p>Search Students</p>
+      <SideBar/>
+      <div className='right'>
+        <p>students</p>
+        <p>Search students</p>
 
-        <input
-          placeholder="Search by name, email, or ID number"
-          type="text"
-          className="search"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
+        <input placeholder='search by name, email, or ID number'
+        type='text'
+        className='search'
+        value={searchTerm}
+        onChange={handleSearchChange} />
 
-        <div className="table">
-          <table className="table__wrapper">
-            <thead className="table__head">
-              <tr className="table__row">
-                <th className="same__class">Student Name</th>
-                <th className="same__class">Email</th>
-                <th className="same__class">ID Number</th>
-                <th className="same__class">Gender</th>
-                <th className="same__class">Age</th>
-                <th className="same__class">Nationality</th>
-                <th className="same__class">Actions</th>
+        < div className='table'>
+          <table className='table_wrapper'>
+            <thead className='table_head'> 
+              <tr className='table__row'>
+                <th className='same_class'>Student Name</th>
+                <th className='same_class'>Email</th>
+                <th className='same_class'>ID number</th>
+                <th className='same_class'>Gender</th>
+                <th className='same_class'>Age</th>
+                <th className='same_class'>Nationality</th>
+                <th className='same_class'>Actions</th>
+
               </tr>
             </thead>
-            <tbody className="table__body">
-              {filtereddata.map((student, index) => (
-                <tr key={index} className="table__row">
-                  <td className="same__class">{student.name}</td>
-                  <td className="same__class">{student.email}</td>
-                  <td className="same__class">{student.idNumber}</td>
-                  <td className="same__class">{student.gender}</td>
-                  <td className="same__class">{student.age}</td>
-                  <td className="same__class">{student.nationality}</td>
-                  <td className="same__class">
-                    <RiDeleteBin6Line
-                      size={25}
-                      color="red"
-                      onClick={() => handleDelete(student.id)}
-                    />
+
+            <tbody className='table__body'>
+              {filteredData.map((student, index) =>(
+                <tr key={index} className='table__row'>
+                  <td className='same_class'>{student.name}</td>
+                  <td className='same_class'>{student.email}</td>
+                  <td className='same_class'>{student.idNumber}</td>
+                  <td className='same_class'>{student.gender}</td>
+                  <td className='same_class'>{student.age}</td>
+                  <td className='same_class'>{student.nationality}</td>
+                  <td className='same_class'>
+                    <RiDeleteBin6Line size={25} color="red"
+                    onClick={() => handleDelete(student.id)} />
                   </td>
+
                 </tr>
-              ))}
+              ))
+              }
+
             </tbody>
           </table>
         </div>
-        <button className="btn-secondary">
-          <Link to="/student-reg">Add a Student</Link>
+        <button className='btn-secondary'>
+              <Link to="/student-reg">Add a student</Link>
         </button>
+
+
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default StudentDasBoard;
+export default StudentDashBoard

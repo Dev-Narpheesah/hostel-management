@@ -1,128 +1,129 @@
 .left {
-  padding: 16px;
-  width: 307px;
-  max-width: 300px;
-  height: 760px;
-  background-color: #fff;
-}
+    padding: 16px;
+    width: 307px;
+    max-width: 300px;
+    height: 760px;
+    background-color: #f0f2f54e;
+  }
+  
+  .left > div {
+    padding: 8px 12px;
+    margin: 8px;
+  }
+  
+  .left > div > a {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--font-family);
+    width: 100%;
+    padding: 8px 12px;
+  }
+  
+  .active-link {
+      background: #f0f2f5;
+      border-radius: 12px;
+    }
 
-.left > div {
-  padding: 8px 12px;
-  margin: 8px;
-}
+  .right{
+    width:921px;
+    padding:16px;
+  }
 
-.left > div > a {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: var(--font-family);
-  width: var(--full-width);
-  padding: 8px 12px;
-}
+  .right p:nth-child(1){
+    width:100%;
+    color:#121417;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 32px;
+  }
 
-.active-link {
-  background-color: #f0f2f5;
-  border-radius: 12px;
-}
+  .right p:nth-child(2){
+    color:#121417;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 12px 0;
 
-.right {
-  width: 921px;
-  padding: 16px;
-}
+  }
 
-.right p:nth-child(1) {
-  width: var(--full-width);
-  color: #121417;
-  font-family: var(--font-family);
-  font-size: 32px;
-  font-weight: 700;
-}
+  .search{
+    width:100%;
+    max-width: 300px;
+    border-radius: 12px;
+    background-color: #f0f2f5;
+    padding:16px;
+    font-size: 16px;
+    margin:12px 0;
+  }
+  .search::placeholder{
+    color: #637587;
+    font-family: var(--font-family);
+    font-weight: 400;
+    line-height: 24px;
+    font-size: 12px;
+  }
 
-.right p:nth-child(2) {
-  color: #121417;
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 16px;
-  margin: 12px 0;
-  line-height: 24px;
-}
-.search {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 12px;
-  background: #f0f2f5;
-  padding: 16px;
-  font-size: 16px;
-  margin: 12px 0;
-}
+  .table{
+    padding:5px;
+    width: var(--full-width);
+    border-radius: 12px;
+    background: #fff;
+    overflow-x: auto;
+    border:1px solid #dbe0e5;
 
-.search::placeholder {
-  color: #637587;
-  font-family: var(--font-family);
-  font-weight: 400;
-  line-height: 24px;
-  font-size: 12px;
-}
 
-.table {
-  padding: 5px;
-  width: var(--full-width);
-  border-radius: 12px;
-  background: #fff;
-  overflow-x: auto;
-  border: 1px solid #dbe0ef;
-}
+  }
 
-.table__wrapper {
-  border-collapse: collapse;
-  width: var(--full-width);
-  font-size: 1.4rem;
-}
+  .table_wrapper{
+    border-collapse: collapse;
+    width: var(--full-width);
+    font-size: 1.4rem;
+  }
 
-.table__head {
-  border-bottom: 1px solid #e5e8eb;
-  font-size: 14px;
-}
+  .table_head{
+    border-bottom: 1px solid #e5e8eb;
+    font-size: 14px;
+  }
 
-.same__class {
-  vertical-align: top;
-  text-align: left;
-  padding: 8px;
-}
+  .same_class{
+    vertical-align: top;
+    text-align: left;
+    padding: 8px;
+  }
 
-.table__row {
-  border-bottom: 1px solid #ccc;
-  font-size: 14px;
-}
+  .table__row{
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+  }
 
-.table__row:last-child {
-  border-bottom: unset;
-}
+  .table__row:last-child{
+    border-bottom: unset;
+  }
 
-.table__body .table__row > td:not(:first-child) {
-  color: #637587;
-}
+  .table_body .table_row>td:not(:first-child){
+    color:#637587;
+  }
 
-.table__row:nth-child(even) {
-  background-color: #fff;
-}
+  .table__row:nth-child(even) {
+    background-color: #fff;
+  }
+  
+  tbody > tr:hover {
+    cursor: pointer;
+  }
+  
+  .right button {
+    margin-top: 1.2em;
+    width: 300px;
+    height: 40px;
+    padding: 0px 16px;
+    color: #121417;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 0.21px;
+  }
 
-.table__body > tr:hover {
-  cursor: pointer;
-}
-
-.right button {
-  margin-top: 1.2em;
-  width: 300px;
-  height: 40px;
-  padding: 0px 16px;
-  color: #121417;
-  font-family: Inter;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 21px;
-  letter-spacing: 0.21px;
-}
-
-._noBg {
-  background: transparent;
-}
+  

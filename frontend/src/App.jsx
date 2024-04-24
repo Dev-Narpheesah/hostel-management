@@ -5,6 +5,8 @@ import StudentReg from "./Component/Register/StudentReg";
 import HomeDash from "./Component/Dashboard/HomeDash";
 import Layout from "./Component/Layout/Layout";
 import StudentDasBoard from "./Component/Dashboard/StudentDasBoard";
+import Rooms from "./Component/Dashboard/Rooms";
+import AdminPreview from "./Component/AdminPreview/AdminPreview";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             }
           />
           <Route path="/studentdash" element={<StudentDasBoard/>}/>
+          <Route path="/room" element={<Rooms/>}/>
+          <Route path="/adminsPrev" element={<AdminPreview/>}/>
         </Routes>
       </div>
     </>
