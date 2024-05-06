@@ -7,31 +7,52 @@ import Layout from "./Component/Layout/Layout";
 import StudentDasBoard from "./Component/Dashboard/StudentDasBoard";
 import Rooms from "./Component/Dashboard/Rooms";
 import AdminPreview from "./Component/AdminPreview/AdminPreview";
+import Attendance from "./Component/Attendance/Attendance";
+import Loader from "./Component/Loader/Loader";
+import { useEffect, useState } from "react";
 
 function App() {
-  return (
-    <>
-      <div>
-        <Routes>
-          <Route path="/" element={<AdminReg />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/student-reg" element={<StudentReg />} />
-          <Route
-            path="/homedash"
-            element={
-              <Layout>
-                
-                <HomeDash />
-              </Layout>
-            }
-          />
-          <Route path="/studentdash" element={<StudentDasBoard/>}/>
-          <Route path="/room" element={<Rooms/>}/>
-          <Route path="/adminsPrev" element={<AdminPreview/>}/>
-        </Routes>
-      </div>
-    </>
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+  const renderRoute = () => (
+    <Routes>
+      <Route path="/" element={<AdminReg />} />
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/student-reg"
+        element={
+          <Layout>
+            <StudentReg />{" "}
+          </Layout>
+        }
+      />
+      <Route
+        path="/homedash"
+        element={
+          <Layout>
+            <HomeDash />
+          </Layout>
+        }
+      />
+      <Route path="/room" element={<Rooms />} />
+      <Route path="/studentdash" element={<StudentDasBoard />} />
+      <Route path="/adminPrev" element={<AdminPreview />} />
+      <Route
+        path="/attendance"
+        element={
+          <Layout>
+          <Attendance />
+          </Layout>
+        }
+      />
+    </Routes>
   );
+  return <> {loading ? <Loader /> : renderRoute()} </>;
 }
 
 export default App;

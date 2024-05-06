@@ -1,26 +1,122 @@
+Header.css
 header {
-    border-bottom: 1px solid #e5e8eb;
-    padding: 12px 40px;
+  border-bottom: 1px solid #e5e8eb;
+  padding: 12px 40px;
 }
 
-.logo a {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.logo {
+  display: flex;
+  gap: 10px;
+}
+
+.logo > a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo a > svg {
+  width: 16px;
+  height: 16px;
 }
 
 .logo a > span {
-    color: #121417;
-    font-size: 20px;
-    font-weight: 700;
-    
+  color: #121417;
+  font-feature-settings: "dlig" on;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22.5px;
+  letter-spacing: -0.27px;
 }
 
 .navItems {
-    gap: 36px;
-    margin-right: -13em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  /* margin-right: -13em; */
+}
+
+.navItems > div a {
+  color: #121417;
+  font-feature-settings: "dlig" on;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
 }
 
 .btn__wrapper {
-    gap: 16px;
+  gap: 16px;
+  /* margin-right: -30em; */
+}
+
+ .sidebar-toggle-icon {
+  cursor: pointer;
+  font-size: 50px;
+  /* display: none; */
+} 
+
+.mobile-sidebar {
+  display: block;
+  position: fixed;
+  left: 0;
+  background-color: #fff;
+}
+.sidebar-close {
+  padding-top: 20px;
+  padding-right: 30px;
+}
+
+.sidebar-close-icon{
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.left {
+  padding: 16px;
+  width: 307px;
+  max-width: 300px;
+  height: 760px;
+  background-color: #f0f2f54e;
+}
+
+.left > div {
+  padding: 8px 12px;
+  margin: 8px;
+}
+
+.left > div > a {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Inter;
+  width: 100%;
+  padding: 8px 12px;
+}
+
+.active-link {
+  border-radius: 12px;
+  background: #f0f2f5;
+}
+
+ @media (max-width: 900px) {
+  .sidebar-toggle-icon {
+    display: block;
+  }
+  .logo a > span {
+    display: none;
+  }
+
+  .logo a > svg {
+    width: 30px;
+    height: 30px;
+  }
+  .btn__wrapper button:nth-child(odd){
+    display: none;
+  }
+
+  .navItems{
+    display: none;
+  }
 }
