@@ -100,6 +100,10 @@ header {
   background: #f0f2f5;
 }
 
+.sidebar-toggle-icon {
+  display: none;
+}
+
  @media (max-width: 900px) {
   .sidebar-toggle-icon {
     display: block;
