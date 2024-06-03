@@ -2,7 +2,9 @@ import React from "react";
 import "./HomeDash.css";
 import { lady, bash, blacky, tallest } from "../../assets";
 import {Link} from "react-router-dom";
+
 const HomeDash = () => {
+
   const activities = [
     {
       userPic: lady,

@@ -12,13 +12,7 @@ import Loader from "./Component/Loader/Loader";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+  
   const renderRoute = () => (
     <Routes>
       <Route path="/" element={<AdminReg />} />
@@ -52,7 +46,7 @@ function App() {
       />
     </Routes>
   );
-  return <> {loading ? <Loader /> : renderRoute()} </>;
+  return <> { renderRoute()} </>;
 }
 
 export default App;
