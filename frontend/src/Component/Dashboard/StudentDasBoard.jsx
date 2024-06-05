@@ -1,11 +1,20 @@
-import React from "react";
+import React,  { useState, useEffect } from "react";
 import "./Dashboard.css";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoCloseOutline, IoMenu } from "react-icons/io5";
 import '../Header/Header.css'
 import SideBar from "./SideBar";
+import {Link} from "react-router-dom"
+import { IoMenu, IoCloseOutline } from "react-icons/io5";
+import { FaPenFancy } from "react-icons/fa";
+import {confirmAlert} from "react-confirm-alert";
+import useAuthRedirect from "../../../context/useAuth"
+import axios from "axios";
+import UpdateCheckIn from "../../../Modal/UpdateCheckIn"
+import ChangeStudentRoom from "../../../Modal/ChangeStudentRoom";
+import UpdateStudentProfile from "../../../Modal/UpdateStudentProfile";
+ 
 
 const studentsData = [
   {
@@ -42,6 +51,40 @@ const StudentDashBoard = () => {
   const [students, setStudents] = useState(studentsData);
   const [filteredData, setFilteredData] = useState(studentsData);
   const [isSidebarToggle, setIsSidebarToggle] = useState(false);
+  const [data, setData] = useState([])
+  const [message, setMessage] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedModal, setSelectedModal] = useState("");
+  const [selectedStudent, setSelectedStudent] = useState(null);
+
+  useEffect(() => {
+    const fetchsStudent = async () => {
+      try {
+        const response = await axios.get("http://localhost:3500/student/")
+        setData(response.data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchsStudent()
+  },[])
+
+  const handleModalOpen = (student) => {
+    setSelectedModal("");
+    setIsModalOpen(true);
+    setSelectedStudent(student);
+  }
+
+  const handleModalClose = () => {
+    setSelectedModal("");
+    setIsModalOpen(false);
+    setSelectedStudent(null);
+  };
+
+  const handleModalSelect = (modalType) => {
+    setSelectedModal(modalType);
+    setIsModalOpen(true);
+  }
 
   //targetting the searchbar that will be call later
   const handleSearchChange = (e) => {

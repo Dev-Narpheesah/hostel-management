@@ -30,7 +30,7 @@ const Attendance = () => {
     const daysOfWeek = [
       "Sun",
       "Mon",
-      "tue",
+      "Tue",
       "Wed",
       "Thur",
       "Fri",

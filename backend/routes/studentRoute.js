@@ -11,7 +11,7 @@ const {
 } = require("../controllers/studentController");
 const router = express.Router();
 
-router.post("/register-student", protect,  registerStudent);
+router.post("/register-student", registerStudent);
 router.get("/", protect,  getAllStudents);
 router.get("/:_id", protect,  getStudent);
 router.patch("/:_id", protect,  updateStudentProfile);
