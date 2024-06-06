@@ -12,19 +12,11 @@ import Loader from "./Component/Loader/Loader";
 import { useEffect, useState } from "react";
 
 function App() {
-  
   const renderRoute = () => (
     <Routes>
       <Route path="/" element={<AdminReg />} />
       <Route path="/login" element={<Login />} />
-      <Route
-        path="/student-reg"
-        element={
-          <Layout>
-            <StudentReg />{" "}
-          </Layout>
-        }
-      />
+      <Route path="/student-reg" element={<StudentReg />} />
       <Route
         path="/homedash"
         element={
@@ -40,13 +32,13 @@ function App() {
         path="/attendance"
         element={
           <Layout>
-          <Attendance />
+            <Attendance />
           </Layout>
         }
       />
     </Routes>
   );
-  return <> { renderRoute()} </>;
+  return <> {renderRoute()} </>;
 }
 
 export default App;

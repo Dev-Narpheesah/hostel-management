@@ -124,10 +124,10 @@ img {
   justify-content: space-between;
 }
 
-.--flex-justify-center {
+/* .--flex-justify-center {
   display: flex;
   justify-content: center;
-}
+} */
 
 .--align-center {
   display: flex;
@@ -247,6 +247,21 @@ overflow-x: hidden;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+
+.btn-danger {
+  border-radius: 12px;
+  background: tomato;
+  padding: var(--primary-btn-padding);
+  color: var(--main-bg);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: var(--font-weight);
+  line-height: 21px;
+  letter-spacing: 0.21px;
+  /* width: 84px; */
+  height: 40px;
 }
 
 

@@ -65,7 +65,7 @@ const studentSchema = new mongoose.Schema({
     },
    
 
-   checkOutTime:{
+   checkedOutTime:{
         type: Date,
         default: null
     },
@@ -79,16 +79,16 @@ const studentSchema = new mongoose.Schema({
 
 );
 
-studentSchema.methods.checkIn = function(){
-    this.checkedIn = true;
-    this.checkInTime = new Date();
-    this.checkOutTime = null;
+// studentSchema.methods.checkIn = function(){
+//     this.checkedIn = true;
+//     this.checkInTime = new Date();
+//     this.checkOutTime = null;
    
-}
-studentSchema.methods.checkOut = function(){
-    this.checkedIn = false;
-    this.checkOutTime = new Date();
-    this.checkInTime = null;
-};
+// }
+// studentSchema.methods.checkOut = function(){
+//     this.checkedIn = false;
+//     this.checkOutTime = new Date();
+//     this.checkInTime = null;
+// };
 const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;

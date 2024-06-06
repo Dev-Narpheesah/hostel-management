@@ -1,125 +1,178 @@
-import { useState } from "react";
-import Sidebar from "./SideBar"
+import { useEffect, useState } from "react";
+import Sidebar from "./SideBar";
 import RoomTable from "./RoomTable";
 import { IoCloseOutline, IoMenu } from "react-icons/io5";
-import "../Dashboard/Dashboard.css"
-
+import "../Dashboard/Dashboard.css";
+import useAuthRedirect from "../../../context/useAuth";
+import axios from "axios";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const initialRooms = [
-    {
-        roomNumber: "101",
-        capacity: 3,
-        occupancy: 2,
-        status: "Available",
-        location: "Lakeside Manor, Riverside",
-    },
-    {
-        roomNumber: "102",
-        capacity: 3,
-        occupancy: 3,
-        status: "Occupied",
-        location: "Hillview Hostel, Springfield",
-    },
-    {
-        roomNumber: "103",
-        capacity: 4,
-        occupancy: 3,
-        status: "Available",
-        location: "Maplewood Lodge, Greenfield",
-    }
+  {
+    roomNumber: "101",
+    capacity: 3,
+    occupancy: 2,
+    status: "Available",
+    location: "Lakeside Manor, Riverside",
+  },
+  {
+    roomNumber: "102",
+    capacity: 3,
+    occupancy: 3,
+    status: "Occupied",
+    location: "Hillview Hostel, Springfield",
+  },
+  {
+    roomNumber: "103",
+    capacity: 4,
+    occupancy: 3,
+    status: "Available",
+    location: "Maplewood Lodge, Greenfield",
+  },
 ];
 
-
 const Rooms = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [rooms, setRooms] = useState(initialRooms);
-    const [filteredData, setFilteredData] = useState(initialRooms);
-    const [isSideBarToggle, setIsSideBarToggle] = useState(false)
+  useAuthRedirect();
 
-    const handleSearchChange = (e) => {
-        const term = e.target.value.toLowerCase();
-        setSearchTerm(term);
-        const filtered = rooms.filter(
-            (room) =>
-                room.roomNumber.toLowerCase().includes(term) ||
-                room.status.toLowerCase().includes(term) ||
-                room.location.toLowerCase().includes(term)
+  const [roomData, setRoomData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [message, setMessage] = useState("");
+  const [isSidebarToggle, setIsSidebarToggle] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchRooms = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3500/room/get-all-room"
         );
-        setFilteredData(filtered);
+        setRoomData(response.data);
+      } catch (error) {
+        setIsLoading(false);
+        if (error.response && error.response.status === 400) {
+          setMessage("Cannot fetch room...");
+        } else {
+          setMessage("Server error!");
+        }
+      } finally {
+        setIsLoading(false);
+      }
     };
+    fetchRooms();
+  }, []);
 
-    const handleAddRoom = (newRoomData) => {
-        setRooms([...rooms, newRoomData]);
-        setFilteredData([...rooms, newRoomData]);
-    };
+  useEffect(() => {
+    const filteredRooms = roomData.filter((res) => {
+      const roomLocation = res.roomLocation?.toLowerCase() || "";
+      const roomStatus = res.roomStatus?.toLowerCase() || "";
 
-    const handleUpdateRoom = (roomNumber, newStatus) => {
-        const updatedRooms = rooms.map((room) =>
-            room.roomNumber === roomNumber ? { ...room, status: newStatus } : room
-        );
-        setRooms(updatedRooms);
-        setFilteredData(updatedRooms);
-    };
-
-    const handleDeleteRoom = (roomNumber) => {
-        const updatedRooms = rooms.filter(
-            (room) => room.roomNumber !== roomNumber
-        );
-        setRooms(updatedRooms);
-        setFilteredData(updatedRooms);
-    };
-
-    return (
-        <div>
-            <div>
-                {isSideBarToggle && (<div className='mobile-side-nav'>
-                    <Sidebar />
-                </div>)}
-            </div>
-
-            <div className='--flex --overflow-hidden'>
-                <div className="desktop-side-nav">
-                    <Sidebar />
-
-                </div>
-                <div className="--flex-dir-column --overflow-y-auto  --flex-1 --overflow-x-hidden">
-                    <main className='--flex-justify-center w-full'>
-                        <div className="right --dash-main">
-                            <div className="--flex-justify-between">
-                                <h1>Hostel Room Listing</h1>
-
-                                {isSideBarToggle ? (<IoCloseOutline className='sidebar-toggle-iconb' onClick={() => setIsSideBarToggle(false)} />) :
-                                    (<IoMenu className='sidebar-toggle-iconb' onClick={() => setIsSideBarToggle(true)} />)}
-                            </div>
-
-                            <p>Search students</p>
-
-                            <input
-                                placeholder="Search by room number, status, or location"
-                                type="text"
-                                className="search"
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                            />
-                            <div>
-                                <RoomTable
-                                    rooms={filteredData}
-                                    onAddRoom={handleAddRoom}
-                                    onUpdateRoom={handleUpdateRoom}
-                                    onDeleteRoom={handleDeleteRoom}
-                                />
-                            </div>
-
-                        </div>
-                    </main>
-
-                </div>
-            </div>
-        </div>
+      return (
+        roomLocation.includes(search.toLowerCase()) ||
+        roomStatus.includes(search.toLowerCase())
+      );
+    });
+    setSearchResult(filteredRooms);
+  }, [roomData, search]);
 
 
+  const handleAddRoom = (newRoomData) => {
+    setRoomData((prevData) => [...prevData, newRoomData]);
+  };
 
+  const handleUpdateRoom = (updatedRoomData) => {
+    setRoomData((prevData) =>
+      prevData.map((room) =>
+        room._id === updatedRoomData._id ? updatedRoomData : room
+      )
     );
+  };
+
+  const removeRoom = async (id) => {
+    try {
+        await axios.delete(`http://localhost:3500/room/delete/${id}`);
+        setRoomData((prevRoomData) => prevRoomData.filter((room) => room._id !== id))
+    } catch(error) {
+        console.error("Failed to delete room", error)
+    }
+  }
+
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: "Delete This Student",
+      message: "Are you sure you want to delete this room?",
+      buttons: [
+        {
+          label: "Delete",
+          onClick: () => removeRoom(id),
+        },
+        {
+          label: "Cancel",
+          onClick: () => alert("Deletion cancelled"),
+        },
+      ],
+    });
+  };
+
+
+  return (
+    <div>
+      <div>
+        {isSidebarToggle && (
+          <div className="mobile-side-nav">
+            <Sidebar />
+          </div>
+        )}
+      </div>
+
+      <div className="--flex --overflow-hidden">
+        <div className="desktop-side-nav">
+          <Sidebar />
+        </div>
+        <div className="--flex-dir-column --overflow-y-auto  --flex-1 --overflow-x-hidden">
+          <main className="--flex-justify-center w-full">
+            <div className="right --dash-main">
+              <div className="--flex-justify-between">
+                <h1>Hostel Room Listing</h1>
+
+                {isSidebarToggle ? (
+                  <IoCloseOutline
+                    className="sidebar-toggle-iconb"
+                    onClick={() => setIsSidebarToggle(false)}
+                  />
+                ) : (
+                  <IoMenu
+                    className="sidebar-toggle-iconb"
+                    onClick={() => setIsSidebarToggle(true)}
+                  />
+                )}
+              </div>
+
+              <p>Search students</p>
+
+              <input
+                placeholder="Search by room number, status, or location"
+                type="text"
+                className="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <div>
+                <RoomTable
+                  rooms={searchResult}
+                  onAddRoom={handleAddRoom}
+                  onUpdateRoom={handleUpdateRoom}
+                  onDeleteRoom={confirmDelete}
+                />
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Rooms;

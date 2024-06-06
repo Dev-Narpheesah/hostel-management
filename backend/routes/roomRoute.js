@@ -9,11 +9,11 @@ const {
   getRoom,
 } = require("../controllers/roomController");
 
-router.post("/createNewRoom", protect, createNewRoom);
-router.get("/get-all-room", protect, getAllRoom);
-router.get("/:roomId", protect, getRoom);
-router.patch("/update-room/:roomId", protect, updateRoom);
+router.post("/createNewRoom", createNewRoom);
+router.get("/get-all-room", getAllRoom);
+router.get("/:roomId", getRoom);
+router.patch("/update-room/:roomId", updateRoom);
 
-router.delete("/delete/:roomId", protect, deleteRoom);
+router.delete("/delete/:roomId", deleteRoom);
 
 module.exports = router;

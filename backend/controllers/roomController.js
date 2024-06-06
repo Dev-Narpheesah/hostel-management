@@ -98,7 +98,8 @@ const updateRoom = asyncHandler(async (req, res) => {
         roomLocation,
         roomStatus,
       } = room;
-      room.roomNumber = req.body.roomNumber || room.roomNumber;
+      
+      room.roomNumber = req.body.roomNumber || roomNumber;
       room.roomCapacity = req.body.roomCapacity || roomCapacity;
       room.roomOccupancy = req.body.roomOccupancy || roomOccupancy;
       room.roomLocation = req.body.roomLocation || roomLocation;
