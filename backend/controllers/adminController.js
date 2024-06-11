@@ -165,31 +165,25 @@ const getAllAdmins = asyncHandler(async (req, res) => {
 });
 
 const updateAdmin = asyncHandler(async (req, res) => {
-  const { adminId } = req.params;
-  try {
-    const admin = await Admin.findById(adminId).select("-password");
+ const adminId = req.params.adminId
+ const {role} = req.body
 
-    if (!admin) {
-      res.status(404).json({ error: "Admin not found" });
-      return;
-    }
+ try {
+  const admin = await Admin.findById(adminId)
 
-    if (req.body.fullname) {
-      admin.fullname = req.body.fullname;
-    }
-    if (req.body.role) {
-      admin.role = req.body.role;
-    }
-    if (req.body.email) {
-      admin.email = req.body.email;
-    }
-
-    const updatedAdmin = await admin.save();
-    res.status(200).json(updatedAdmin);
-  } catch (error) {
-    console.error("Error updating admin: ", error);
-    res.status(500).send({ error: " Internal Server error" });
+  if (!admin) {
+    return res.status(404).json({msg: 'Admin not found'})
   }
+
+  admin.role = role;
+
+  await admin.save();
+
+  res.status(200).json(admin)
+ } catch (error) {
+  console.error("Error updating admin:", error);
+  res.status(500).send({ msg: "Internal Server error" });
+ }
 });
 
 const logoutAdmin = asyncHandler(async (req, res) => {

@@ -46,9 +46,9 @@ const StudentDasboard = () => {
   };
 
   const handleModalClose = () => {
+    setIsModalOpen(false);
     setSelectedModal("");
     setSelectedStudent(null);
-    setIsModalOpen(false);
   };
 
   const handleModalSelect = (modalType) => {
@@ -217,7 +217,7 @@ const StudentDasboard = () => {
               >
                 Update Check-In
               </button>
-              <button onClick={handleModalSelect}></button>
+              <button onClick={handleModalClose}>Close</button>
             </div>
           </div>
         )}
