@@ -33,7 +33,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send("Hello Boss!");
+  res.send("Hello Boss🤭!");
 });
 
 app.use("/admin", adminRoute);
