@@ -40,7 +40,7 @@ const Login = () => {
       setIsSubmitting(true);
 
       axios
-        .post("http://localhost:3500/admin/login", formData)
+        .post("https://hostel-management-sand.vercel.app/admin/login", formData)
         .then((response) => {
           setUser(response.data);
           setIsSubmitting(false);

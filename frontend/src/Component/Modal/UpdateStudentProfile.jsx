@@ -20,7 +20,7 @@ const UpdateStudentProfile = ({ student, onClose }) => {
 
     try {
       await axios.patch(
-        `http://localhost:3500/student/${student._id}`,
+        `https://hostel-management-sand.vercel.app/student/${student._id}`,
         formData
       );
     } catch (error) {
