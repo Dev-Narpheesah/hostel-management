@@ -72,7 +72,7 @@ const HomeDash = () => {
   return (
     <div className="--flex-center __homeDashCon">
       <div className="__paraCon">
-        <h1 className="__paraHeader">Hi {shortenText(user.fullname, 8)}</h1>
+        <h1 className="__paraHeader">Hi </h1>
       </div>
 
       <div className="__secondCon">

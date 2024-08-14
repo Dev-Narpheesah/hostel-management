@@ -95,7 +95,9 @@ const Login = () => {
             {isSubmitting ? "Siging you up..." : "Login"}
           </button>
         </form>
-        {formValidMessage && (<p className="error-message">{formValidMessage}</p>)}
+        {formValidMessage && (
+          <p className="error-message">{formValidMessage}</p>
+        )}
         <p>
           Don&apos;t have an account? <Link to="/">Register</Link>{" "}
         </p>
